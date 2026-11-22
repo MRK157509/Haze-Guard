@@ -76,7 +76,6 @@ persistence. This contract does not change those settings. Anonymous access is
 only the repository's current development configuration and is not a
 production security claim.
 
-The backend currently contains no persistence implementation. Its MQTT
-consumer therefore receives a persistence callback from the future service
-layer; this keeps MQTT connection handling separate from validation and
-database access.
+The backend passes accepted messages to its existing observation persistence
+service. The simulator is only a publisher: it never writes to PostgreSQL or
+calls an HTTP ingestion endpoint.

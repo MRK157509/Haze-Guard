@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react'
 import { getObservations } from '../../api/client'
 import type { ObservationFilters, ObservationPage } from '../../types/observation'
 
+const POLL_INTERVAL_MS = 5_000
+
 export function useObservations(filters: ObservationFilters) {
   const [data, setData] = useState<ObservationPage | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -15,7 +17,11 @@ export function useObservations(filters: ObservationFilters) {
       setError(caught instanceof Error ? caught.message : 'Unable to load observations.')
     }
   }, [filters])
-  // oxlint-disable-next-line react(set-state-in-effect) -- This effect starts the required API synchronization.
-  useEffect(() => { void load() }, [load])
+  // The dashboard remains HTTP-only; polling reveals MQTT-ingested records without a browser refresh.
+  useEffect(() => {
+    void load()
+    const interval = window.setInterval(() => { void load() }, POLL_INTERVAL_MS)
+    return () => window.clearInterval(interval)
+  }, [load])
   return { data, error, loading, reload: load }
 }

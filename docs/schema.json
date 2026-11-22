@@ -1,0 +1,8 @@
+{
+  "node_id": "node-01",
+  "timestamp": "2026-11-01T10:30:00Z",
+  "signal_type": "spoofing",
+  "confidence": 0.93,
+  "coordinates": { "lat": 18.6298, "lon": 73.7997 },
+  "metadata": {}
+}

@@ -1,9 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
 venv/
 .venv/
-__pycache__/
-*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# Environment and secrets
 .env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Node.js
 node_modules/
 dashboard/dist/
-.DS_Store
+dashboard/build/
+
+# Database and local data
 pgdata/
+*.sqlite
+*.sqlite3
+*.db
+
+# IDE and operating system
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
